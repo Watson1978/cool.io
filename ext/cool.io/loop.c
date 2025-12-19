@@ -115,7 +115,7 @@ void Coolio_Loop_process_event(VALUE watcher, int revents)
   watcher_data = Coolio_Watcher_ptr(watcher);
 
   if(!rb_obj_is_kind_of(watcher_data->loop, cCoolio_Loop))
-    rb_raise(rb_eArgError, "[Coolio_Loop_process_event] expected loop to be an instance of Coolio::Loop, not %s. revents %d", RSTRING_PTR(rb_inspect(watcher_data->loop)), revents);
+    rb_raise(rb_eArgError, "[Coolio_Loop_process_event] expected loop to be an instance of Coolio::Loop, not %s. revents %d; detached_watcher_data %p, watcher_data %p", RSTRING_PTR(rb_inspect(watcher_data->loop)), revents, detached_watcher_data, watcher_data);
 
   loop_data = Coolio_Loop_ptr(watcher_data->loop);
 

@@ -58,6 +58,8 @@ struct Coolio_Watcher
   void (*dispatch_callback)(VALUE self, int revents);
 };
 
+extern void *detached_watcher_data;
+
 void Coolio_Loop_process_event(VALUE watcher, int revents);
 
 void Init_coolio_buffer();

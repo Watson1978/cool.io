@@ -24,6 +24,8 @@ static VALUE Coolio_Watcher_evloop(VALUE self);
 static VALUE Coolio_Watcher_attached(VALUE self);
 static VALUE Coolio_Watcher_enabled(VALUE self);
 
+void *detached_watcher_data;
+
 /* 
  * Watchers are Coolio's event observers.  They contain a set of callback
  * methods prefixed by on_* which fire whenever events occur.
@@ -146,6 +148,8 @@ static VALUE Coolio_Watcher_detach(VALUE self)
   int i;
 
   watcher_data = Coolio_Watcher_ptr(self);
+
+  detached_watcher_data = (void *)watcher_data;
 
   if(watcher_data->loop == Qnil)
     rb_raise(rb_eRuntimeError, "not attached to a loop");
