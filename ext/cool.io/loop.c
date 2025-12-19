@@ -113,6 +113,10 @@ void Coolio_Loop_process_event(VALUE watcher, int revents)
   /* The Global VM lock isn't held right now, but hopefully
    * we can still do this safely */
   watcher_data = Coolio_Watcher_ptr(watcher);
+
+  if(!rb_obj_is_kind_of(watcher_data->loop, cCoolio_Loop))
+    rb_raise(rb_eArgError, "[Coolio_Loop_process_event] expected loop to be an instance of Coolio::Loop, not %s. revents %d", RSTRING_PTR(rb_inspect(watcher_data->loop)), revents);
+
   loop_data = Coolio_Loop_ptr(watcher_data->loop);
 
   /*  Well, what better place to explain how this all works than
